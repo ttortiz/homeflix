@@ -1,0 +1,46 @@
+version: '3.2'
+services:
+
+#Media Player
+  homeflix.kodi.player:
+    image: homeflix/kodi
+    build:
+      context: player/kodi
+    networks:
+      - homeflix
+
+#Torrent
+  homeflix.transmission.torrent:
+    image: homeflix/transmission
+    build:
+      context: torrent/transmission
+    ports:
+      - "8085:9091"
+    networks:
+      - homeflix
+
+#Movies
+  homeflix.radarr.movies:
+    image: homeflix/radarr
+    build:
+      context: movies/radarr
+    ports:
+      - "8083:9091"
+    networks:
+      - homeflix
+
+#Series
+  homeflix.sonarr.series:
+    image: homeflix/sonarr
+    build:
+      context: series/sonarr
+    ports:
+      - "8082:9091"
+    networks:
+      - homeflix
+
+networks:
+  homeflix:
+
+volumes:
+  external-drive:
