@@ -1,0 +1,20 @@
+version: '3.2'
+services:
+
+#Torrent
+  homeflix.transmission.torrent:
+    container_name: homeflix.transmission.torrent
+    image: homeflix/transmission
+    build:
+      context: .
+    ports:
+      - "8085:9091"
+    networks:
+      - homeflix
+
+
+networks:
+  homeflix:
+
+volumes:
+  external-drive:

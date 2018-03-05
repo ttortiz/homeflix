@@ -1,0 +1,28 @@
+{
+  "alt-speed-enabled": true,
+  "alt-speed-down": 50,
+  "alt-speed-time-enabled": false,
+  "alt-speed-time-begin": 540,
+  "alt-speed-time-day": 127,
+  "alt-speed-time-end": 1020,
+  "speed-limit-down": 1200,
+  "speed-limit-down-enabled": false,
+  "speed-limit-up": 50,
+  "speed-limit-up-enabled": false,
+  "upload-limit": 100,
+  "upload-limit-enabled": 0,
+  "alt-speed-up": 50,
+  "rpc-url": "/transmission/",
+  "rpc-whitelist": "127.0.0.1",
+  "rpc-whitelist-enabled": false,
+  "incomplete-dir-enabled": true,
+  "peer-port": 5141,
+  "port-forwarding-enabled": true,
+
+  "rpc-username": "ortiz",
+  "rpc-password": "{971437632e7bfb5a632210b4f8ccc4a8bd81b2d4164IQ8Jz",
+
+  "download-dir": "/media/homeflix/movies",
+  "incomplete-dir": "/media/homeflix/_torrents/_in_progress",
+
+}
