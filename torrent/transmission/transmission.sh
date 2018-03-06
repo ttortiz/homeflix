@@ -1,2 +1,5 @@
+#!/bin/bash
 
-transmission-daemon --foreground --allowed * --blocklist
+exec transmission-daemon --foreground
+
+#exec tail -f /dev/stderr

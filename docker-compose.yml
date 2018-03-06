@@ -2,7 +2,7 @@ version: '3.2'
 services:
 
 #Media Player
-  homeflix.kodi.player:
+  player.homeflix.kodi:
     image: homeflix/kodi
     build:
       context: player/kodi
@@ -10,7 +10,7 @@ services:
       - homeflix
 
 #Torrent
-  homeflix.transmission.torrent:
+  torrent.homeflix.transmission:
     image: homeflix/transmission
     build:
       context: torrent/transmission
@@ -20,7 +20,7 @@ services:
       - homeflix
 
 #Movies
-  homeflix.radarr.movies:
+  movies.homeflix.radarr:
     image: homeflix/radarr
     build:
       context: movies/radarr
@@ -30,7 +30,7 @@ services:
       - homeflix
 
 #Series
-  homeflix.sonarr.series:
+  series.homeflix.sonarr:
     image: homeflix/sonarr
     build:
       context: series/sonarr
@@ -43,4 +43,4 @@ networks:
   homeflix:
 
 volumes:
-  external-drive:
+  homeflix-drive:
