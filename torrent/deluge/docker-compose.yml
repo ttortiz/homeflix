@@ -1,0 +1,19 @@
+version: '3.2'
+services:
+
+#Torrent
+  torrent.homeflix.deluge:
+    container_name: torrent.homeflix.deluge
+    image: homeflix/deluge
+    build:
+      context: .
+    ports:
+      - "8012:8112"
+    networks:
+      - homeflix
+
+networks:
+  homeflix:
+
+volumes:
+  homeflix-drive:
