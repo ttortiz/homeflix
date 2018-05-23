@@ -2,18 +2,24 @@ version: '3.2'
 services:
 
 #Torrent
-  torrent.homeflix.deluge:
-    container_name: torrent.homeflix.deluge
-    image: homeflix/deluge
-    build:
-      context: .
+  homeflix.torrent:
+    image: lsioarmhf/deluge
     ports:
-      - "8012:8112"
+      - "8112:8112"
+    volumes:
+      - type: bind
+        source: /home/pi/_drive/downloads
+        target: /downloads
+      - type: bind
+        source: /home/pi/_drive/.config/deluge
+        target: /config
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: 'America/Sao_Paulo'
+      UMASK_SET: '022'
     networks:
       - homeflix
 
 networks:
   homeflix:
-
-volumes:
-  homeflix-drive:

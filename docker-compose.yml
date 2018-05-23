@@ -1,46 +1,99 @@
 version: '3.2'
 services:
-
-#Media Player
-  player.homeflix.kodi:
-    image: homeflix/kodi
-    build:
-      context: player/kodi
-    networks:
-      - homeflix
-
-#Torrent
-  torrent.homeflix.transmission:
-    image: homeflix/transmission
-    build:
-      context: torrent/transmission
+  homeflix.torrent:
+    image: lsioarmhf/deluge
     ports:
-      - "8085:9091"
+      - "8112:8112"
+    volumes:
+      - type: bind
+        source: /home/pi/_drive/downloads
+        target: /downloads
+      - type: bind
+        source: /home/pi/_drive/.config/deluge
+        target: /config
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: 'America/Sao_Paulo'
+      UMASK_SET: '022'
     networks:
       - homeflix
 
-#Movies
-  movies.homeflix.radarr:
-    image: homeflix/radarr
-    build:
-      context: movies/radarr
+  homeflix.indexer:
+    image: lsioarmhf/jackett
     ports:
-      - "8083:9091"
+      - "9117:9117"
+    volumes:
+      - type: bind
+        source: /home/pi/_drive/downloads
+        target: /downloads
+      - type: bind
+        source: /home/pi/_drive/.config/jackett
+        target: /config
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: 'America/Sao_Paulo'
     networks:
       - homeflix
 
-#Series
-  series.homeflix.sonarr:
-    image: homeflix/sonarr
-    build:
-      context: series/sonarr
+  homeflix.movies:
+    image: lsioarmhf/radarr
     ports:
-      - "8082:9091"
+      - "7878:7878"
+    volumes:
+      - type: bind
+        source: /home/pi/_drive/downloads
+        target: /downloads
+      - type: bind
+        source: /home/pi/_drive/.config/radarr
+        target: /config
+      - type: bind
+        source: /home/pi/_drive/downloads/movies
+        target: /movies
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: 'America/Sao_Paulo'
     networks:
       - homeflix
+
+  homeflix.series:
+    image: lsioarmhf/sonarr
+    ports:
+      - "8989:8989"
+    volumes:
+      - type: bind
+        source: /home/pi/_drive/downloads
+        target: /downloads
+      - type: bind
+        source: /home/pi/_drive/.config/sonarr
+        target: /config
+      - type: bind
+        source: /home/pi/_drive/downloads/series
+        target: /tv
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: 'America/Sao_Paulo'
+    networks:
+      - homeflix
+
+  # homeflix.series:
+  #   image: lsioarmhf/kodi-headless
+  #   ports:
+  #     - "8080:8080"
+  #     - "9777:9777/udp"
+  #   volumes:
+  #     - type: bind
+  #       source: /home/pi/_drive/.config/kodi-headless
+  #       target: /config
+  #   environment:
+  #     PUID: '1000'
+  #     PGID: '1000'
+  #     TZ: 'America/Sao_Paulo'
+  #   networks:
+  #     - homeflix
 
 networks:
   homeflix:
-
-volumes:
-  homeflix-drive:
