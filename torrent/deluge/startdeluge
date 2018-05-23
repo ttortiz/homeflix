@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+/usr/bin/deluged -L info
+exec /usr/bin/deluge-web -L info
